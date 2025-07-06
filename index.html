@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Data Waster</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 50px;
+      background: #111;
+      color: #0f0;
+    }
+    button {
+      font-size: 1.2em;
+      padding: 10px 20px;
+      margin: 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>💾 Data Waster</h1>
+  <p>Click start to begin wasting your precious bandwidth!</p>
+  <h2>Data Wasted: <span id="counter">0</span> MB</h2>
+  <button onclick="startWasting()">Start</button>
+  <button onclick="stopWasting()">Stop</button>
+
+  <script>
+    let interval;
+    let totalMB = 0;
+
+    function startWasting() {
+      if (interval) return;
+      interval = setInterval(() => {
+        fetch("https://via.placeholder.com/1024x1024.jpg")
+          .then(() => {
+            totalMB++;
+            document.getElementById("counter").textContent = totalMB;
+          });
+      }, 1000);
+    }
+
+    function stopWasting() {
+      clearInterval(interval);
+      interval = null;
+    }
+  </script>
+</body>
+</html>

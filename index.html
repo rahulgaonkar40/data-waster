@@ -1,26 +1,65 @@
-<script>
-  let interval;
-  let totalMB = 0;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Data Waster</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 50px;
+      background: #111;
+      color: #0f0;
+    }
+    button {
+      font-size: 1.2em;
+      padding: 10px 20px;
+      margin: 20px;
+      cursor: pointer;
+      background-color: #222;
+      color: #0f0;
+      border: 1px solid #0f0;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #0f0;
+      color: #111;
+    }
+  </style>
+</head>
+<body>
+  <h1>💾 Data Waster</h1>
+  <p>Click start to begin wasting your precious bandwidth!</p>
+  <h2>Data Wasted: <span id="counter">0</span> MB</h2>
+  <button onclick="startWasting()">Start</button>
+  <button onclick="stopWasting()">Stop</button>
 
-  function startWasting() {
-    if (interval) return;
-    interval = setInterval(() => {
-      const url = `https://corsproxy.io/?https://file-examples.com/storage/fe1b3e3c6f3b6b000b0e6f6/2017/10/file_example_JPG_1MB.jpg&nocache=${Date.now()}`;
-      fetch(url)
-        .then(response => {
-          if (response.ok) {
-            totalMB++;
-            document.getElementById("counter").textContent = totalMB;
-          } else {
-            console.error("Fetch failed with status:", response.status);
-          }
-        })
-        .catch((err) => console.error("Fetch error:", err));
-    }, 1000);
-  }
+  <script>
+    let interval;
+    let totalMB = 0;
 
-  function stopWasting() {
-    clearInterval(interval);
-    interval = null;
-  }
-</script>
+    function startWasting() {
+      if (interval) return;
+      interval = setInterval(() => {
+        const url = `https://corsproxy.io/?https://file-examples.com/storage/fe1b3e3c6f3b6b000b0e6f6/2017/10/file_example_JPG_1MB.jpg&nocache=${Date.now()}`;
+        fetch(url)
+          .then(response => {
+            if (response.ok) {
+              totalMB++;
+              document.getElementById("counter").textContent = totalMB;
+            } else {
+              console.error("Fetch failed with status:", response.status);
+            }
+          })
+          .catch((err) => console.error("Fetch error:", err));
+      }, 1000);
+    }
+
+    function stopWasting() {
+      clearInterval(interval);
+      interval = null;
+    }
+  </script>
+</body>
+</html>
